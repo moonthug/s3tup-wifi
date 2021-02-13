@@ -5,7 +5,9 @@
   "author": "Alex Coulcher <alex@polyglot.rodeo> (http://polyglot.rodeo/)",
   "homepage": "https://github.com/moonthug/s3tup-wifi#readme",
   "license": "MIT",
-  "bin": "dist/cli.js",
+  "bin": {
+    "wifi-s3tup": "./dist/bin.js"
+  },
   "main": "dist/index.js",
   "directories": {
     "src": "src"
@@ -40,5 +42,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "c82c9c2394d6f167778b6b5583512c7b595b8c71"
+  "gitHead": "076ffa8c22e25e07a7f852090cbc2869ec88c7d8"
 }
