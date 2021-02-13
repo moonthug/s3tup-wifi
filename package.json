@@ -3,7 +3,7 @@
   "scripts": {
     "build": "lerna run build",
     "prepublish": "npm run build",
-    "publish": "lerna publish --access=public",
+    "publish": "lerna publish",
     "watch": "lerna run --parallel watch"
   },
   "devDependencies": {

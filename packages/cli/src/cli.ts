@@ -7,10 +7,10 @@ const program = new Command();
 
 program
   .command('start')
-  .arguments('<username> [password]')
+  .arguments('<ssid> <ifName>')
   .description('Start wifi-s3tup', {
-    username: 'user to login',
-    password: 'password for user, if required'
+    ssid: 'SSID to create',
+    ifName: 'Interface name to create the AP on'
   })
   .action(start);
 
