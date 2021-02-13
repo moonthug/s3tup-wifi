@@ -7,7 +7,7 @@ export const app = new Koa();
 
 const router = new Router();
 router.get('/scan', async ctx => {
-  const scanResults = scan;
+  const scanResults = await scan();
   ctx.body = scanResults;
 })
 
