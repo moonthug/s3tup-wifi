@@ -38,5 +38,5 @@
     "@types/koa": "^2.11.8",
     "@types/koa__router": "^8.0.4"
   },
-  "gitHead": "106caeabfab65b604de9d06254a34e63ca31d932"
+  "gitHead": "3e6b1d20bb0c0f986c913c258fbc2d053e56218e"
 }
