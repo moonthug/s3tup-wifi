@@ -1,6 +1,6 @@
 {
   "name": "@wifi-s3tup/cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "> TODO: description",
   "author": "Alex Coulcher <alex@polyglot.rodeo> (http://polyglot.rodeo/)",
   "homepage": "https://github.com/moonthug/s3tup-wifi#readme",
@@ -29,13 +29,13 @@
     "url": "https://github.com/moonthug/s3tup-wifi/issues"
   },
   "dependencies": {
-    "@wifi-s3tup/manager": "^0.0.4",
-    "@wifi-s3tup/server": "^0.0.4",
+    "@wifi-s3tup/manager": "^0.0.5",
+    "@wifi-s3tup/server": "^0.0.5",
     "commander": "^7.0.0",
     "pino": "^6.11.1"
   },
   "devDependencies": {
     "@types/pino": "^6.3.5"
   },
-  "gitHead": "3e6b1d20bb0c0f986c913c258fbc2d053e56218e"
+  "gitHead": "f5116957466e2bdc11e9a35efaaeaa3a90d642e1"
 }
