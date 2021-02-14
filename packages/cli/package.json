@@ -14,7 +14,7 @@
     "bin": "bin"
   },
   "files": [
-    "dist/**/*.js"
+    "dist"
   ],
   "repository": {
     "type": "git",
