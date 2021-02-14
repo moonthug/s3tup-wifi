@@ -31,9 +31,11 @@
     "url": "https://github.com/moonthug/s3tup-wifi/issues"
   },
   "dependencies": {
+    "mkdirp": "^1.0.4",
     "pino": "^6.11.1"
   },
   "devDependencies": {
+    "@types/mkdirp": "^1.0.1",
     "@types/pino": "^6.3.5"
   },
   "publishConfig": {
