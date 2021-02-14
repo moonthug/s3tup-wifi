@@ -6,7 +6,7 @@
   "homepage": "https://github.com/moonthug/s3tup-wifi#readme",
   "license": "MIT",
   "bin": {
-    "wifi-s3tup": "./dist/cli.js"
+    "wifi-s3tup": "./bin/wifi-s3tup"
   },
   "main": "dist/index.js",
   "directories": {
