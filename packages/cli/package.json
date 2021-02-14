@@ -10,10 +10,11 @@
   },
   "main": "dist/index.js",
   "directories": {
-    "src": "src"
+    "src": "src",
+    "bin": "bin"
   },
   "files": [
-    "src"
+    "dist"
   ],
   "repository": {
     "type": "git",
