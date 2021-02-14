@@ -3,26 +3,33 @@ import Router from '@koa/router';
 import logger from 'koa-logger'
 import { scan } from '@wifi-s3tup/manager';
 
-export const app = new Koa();
+export interface AppOptions {
+  ifName: string;
+}
 
-app.use(logger());
+export function createApp(options: AppOptions): Koa {
+  const app = new Koa();
 
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    ctx.status = err.status || 500;
-    ctx.body = err.message;
-    ctx.app.emit('error', err, ctx);
-  }
-});
+  app.use(logger());
 
-const router = new Router();
+  app.use(async (ctx, next) => {
+    try {
+      await next();
+    } catch (err) {
+      ctx.status = err.status || 500;
+      ctx.body = err.message;
+      ctx.app.emit('error', err, ctx);
+    }
+  });
 
-router.get('/scan', async ctx => {
-  const scanResults = await scan();
-  ctx.body = scanResults;
-})
+  const router = new Router();
 
-app.use(router.routes());
-app.use(router.allowedMethods());
+  router.get('/scan', async ctx => {
+    ctx.body = await scan({ ifName: options.ifName });
+  })
+
+  app.use(router.routes());
+  app.use(router.allowedMethods());
+
+  return app;
+}

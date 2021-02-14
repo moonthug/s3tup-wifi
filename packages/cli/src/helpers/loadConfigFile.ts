@@ -7,5 +7,4 @@ async function createDirectoryIfNotExist() {
 }
 
 export async function loadConfigFile() {
-  createDirectoryIfNotExist(CONFIG_BASE_PATH);
 }
