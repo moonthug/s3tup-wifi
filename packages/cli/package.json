@@ -23,6 +23,7 @@
   "scripts": {
     "build": "tsc",
     "prebuild": "rm -rf ./dist",
+    "start:debug": "node ./bin/wifi-s3tup init test-ssid wlan0",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "test": "mocha -r ts-node/register src/**/*.test.ts",
