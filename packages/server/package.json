@@ -1,6 +1,6 @@
 {
   "name": "@wifi-s3tup/server",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "> TODO: description",
   "author": "Alex Coulcher <alex@polyglot.rodeo> (http://polyglot.rodeo/)",
   "homepage": "https://github.com/moonthug/s3tup-wifi#readme",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@koa/router": "^10.0.0",
-    "@wifi-s3tup/manager": "^0.0.10",
+    "@wifi-s3tup/manager": "^0.0.11",
     "koa": "^2.13.1"
   },
   "devDependencies": {
