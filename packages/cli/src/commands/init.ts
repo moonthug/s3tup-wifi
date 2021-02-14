@@ -1,6 +1,6 @@
 import { createAP } from '@wifi-s3tup/manager';
 import { startServer, stopServer } from '@wifi-s3tup/server';
-import { logger } from '../utils/logger';
+// import { logger } from '../utils/logger';
 import { promises as fs } from 'fs';
 import { CONFIG_FILE_PATH } from '../constants/defaults';
 
@@ -19,12 +19,12 @@ export async function init(ssid: string, ifName: string, options: InitOptions) {
   //   throw new Error(`wifi-s3tup already initialised!`);
   // }
 
-  logger.info('Creating Wifi AP...');
+  // logger.info('Creating Wifi AP...');
   const createAPResult = await createAP({
     ssid, ifName
   });
 
-  logger.info('Starting Webserver..');
+  // logger.info('Starting Webserver..');
   startServer({ ifName, port: options.port });
 
   process.on('beforeExit', () => {
