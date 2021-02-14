@@ -6,3 +6,13 @@ Web based UI, that allows a user to select from available networks for the devic
 
 This project aims to provide this functionality to linux based IOT projects providing a command line interface that can
 be used to sequence the network setup of a device.
+
+### Dependencies
+
+- `hostapd`
+- `dnsmasq`
+
+## Packages
+
+### Manager
+

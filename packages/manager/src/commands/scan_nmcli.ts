@@ -1,9 +1,5 @@
 import { exec, ExecResult } from '../helpers/exec';
 
-export interface ScanOptions {
-  ifName: string;
-}
-
 export interface ScanResult {
   ssid: string;
   bssid: string;
@@ -66,11 +62,14 @@ function parse(result: ExecResult): ScanResult[] {
   return undefined;
 }
 
-export async function scan(scanOptions: ScanOptions): Promise<ScanResult[]> {
+export async function scan_nmcli(): Promise<ScanResult[]> {
   return parse(await exec([
-    'iw dev',
-    scanOptions.ifName,
-    'scan',
+    'nmcli',
+    '--terse',
+    '--fields=active,ssid,bssid,mode,chan,freq,signal,security,wpa-flags,rsn-flags',
+    'device',
+    'wifi',
+    'list',
     ])
   );
 }

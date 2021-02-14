@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { start } from './commands/start';
+import { init } from './commands/start';
 
 const program = new Command();
 
@@ -10,6 +10,6 @@ program
     ssid: 'SSID to create',
     ifName: 'Interface name to create the AP on'
   })
-  .action(start);
+  .action(init);
 
 program.parse(process.argv);

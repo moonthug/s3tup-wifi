@@ -1,0 +1,7 @@
+interface={ifName}
+driver=nl80211
+ssid={ssid}
+hw_mode={hwMode}
+channel={channel}
+macaddr_acl=0
+ignore_broadcast_ssid=0
