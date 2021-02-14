@@ -1,4 +1,4 @@
-import { exec, ExecResult } from '../helpers/exec';
+import { ExecResult, exec } from '../helpers/exec';
 import { parseOk } from '../helpers/parseOk';
 import { createFileFromTemplate } from '../helpers/createFileFromTemplate';
 
@@ -61,9 +61,13 @@ export async function createAP(options: CreateAPOptions): Promise<CreateAPResult
     'dnsmasq_conf'
   );
 
-  if (commandOptions.reboot === true) {
-    await exec('reboot');
-  }
+  parseOk(await exec('systemctl unmask hostapd'), { title: 'Unmask hostapd' });
+  parseOk(await exec('systemctl enable hostapd'), { title: 'Enable hostapd' });
+  parseOk(await exec('systemctl start hostapd'), { title: 'Start hostapd' });
+
+  // if (commandOptions.reboot === true) {
+  //   await exec('reboot');
+  // }
 
   return commandOptions as CreateAPResult;
 }
