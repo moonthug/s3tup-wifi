@@ -20,6 +20,7 @@
     "build": "tsc",
     "prebuild": "rm -rf ./dist",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "start": "node dist/index.js",
     "start:debug": "ts-node example/basic.ts",
     "test": "mocha -r ts-node/register src/**/*.test.ts",

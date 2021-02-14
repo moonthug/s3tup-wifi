@@ -8,7 +8,7 @@ export interface ServerOptions {
   port: number;
 }
 
-export function startServer(options: ServerOptions) {
+export function startServer(options: ServerOptions): Server {
   const app = createApp(options);
   server = createServer(app.callback());
   server.listen(options.port);
@@ -16,6 +16,6 @@ export function startServer(options: ServerOptions) {
   return server;
 }
 
-export function stopServer() {
+export function stopServer(): void {
   server.close();
 }

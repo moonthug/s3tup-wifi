@@ -21,6 +21,7 @@
     "copy:templates": "cp -R ./src/templates ./dist",
     "prebuild": "rm -rf ./dist && mkdir dist && npm run copy:templates",
     "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
     "start": "node dist/index.js",
     "start:debug": "ts-node src/index.ts",
     "test": "mocha -r ts-node/register src/**/*.test.ts",
@@ -35,6 +36,7 @@
   },
   "gitHead": "cda4fb2a3b376f2729193f8436abd54396b0c7a6",
   "dependencies": {
+    "@wifi-s3tup/utils": "^0.0.23",
     "string-template": "^1.0.0"
   },
   "devDependencies": {

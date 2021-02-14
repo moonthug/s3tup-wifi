@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { init } from './commands/init';
+import { init, start } from './commands';
 
 const program = new Command();
 
@@ -12,5 +12,10 @@ program
     port: 'Port to run the webserver on (default: 3000)'
   })
   .action(init);
+
+program
+  .command('start')
+  .description('Start wifi-s3tup')
+  .action(start);
 
 program.parse(process.argv);

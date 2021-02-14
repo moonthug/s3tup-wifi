@@ -15,7 +15,7 @@ export interface ScanResult {
   }
 }
 
-const BSSID_REGEXP = /[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}/g
+const BSSID_REGEXP = /[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}/g;
 
 function parse(result: ExecResult): ScanResult[] {
   if (result.error === false) {
@@ -56,7 +56,7 @@ function parse(result: ExecResult): ScanResult[] {
             rsn: security_flags_rsn
           }
         };
-      })
+      });
   }
 
   return undefined;
@@ -70,6 +70,6 @@ export async function scan_nmcli(): Promise<ScanResult[]> {
     'device',
     'wifi',
     'list',
-    ])
+  ])
   );
 }

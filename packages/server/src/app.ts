@@ -1,6 +1,6 @@
 import Koa from 'koa';
 import Router from '@koa/router';
-import logger from 'koa-logger'
+import logger from 'koa-logger';
 import { scan } from '@wifi-s3tup/manager';
 
 export interface AppOptions {
@@ -26,7 +26,7 @@ export function createApp(options: AppOptions): Koa {
 
   router.get('/scan', async ctx => {
     ctx.body = await scan({ ifName: options.ifName });
-  })
+  });
 
   app.use(router.routes());
   app.use(router.allowedMethods());

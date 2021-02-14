@@ -14,11 +14,11 @@ export async function exec(command: string | string[]): Promise<ExecResult> {
   return new Promise((resolve, reject) => {
     nodeExec(commandValue, (err: ExecException | null, stdOut: string, stdErr: string) => {
       if (err) {
-        return reject(err)
+        return reject(err);
       }
 
       if (stdErr) {
-        return resolve({ stdErr, error: true })
+        return resolve({ stdErr, error: true });
       }
 
       resolve({ stdOut, error: false });
