@@ -1,65 +1,81 @@
-import { exec, ExecResult } from '../helpers/exec';
+import { ExecResult, exec } from '../helpers/exec';
 
 export interface ScanOptions {
   ifName: string;
 }
 
 export interface ScanResult {
-  ssid: string;
-  bssid: string;
-  mode: string;
+  address: string;
   channel: number;
   frequency: number;
-  // signal_level: dBFromPercentage(quality),
+  mode: string;
   quality: number;
+  signal: number;
+  noise: number;
   security: string;
-  security_flags: {
-    wpa: string,
-    rsn: string
-  }
+  ssid: string;
 }
 
 const BSSID_REGEXP = /[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}\\:[A-F0-9]{2}/g;
 
 function parse(result: ExecResult): ScanResult[] {
   if (result.error === false) {
-    // Taken from https://github.com/friedrith/node-wifi
     return result.stdOut
-      .split('\n')
-      .filter(line => line !== '' && line.includes(':'))
-      .map(line => {
-        const match = line.match(BSSID_REGEXP);
-        const bssid = match[0].replace(/\\:/g, ':');
+      .split(/Cell [0-9]+ -/)
+      .map(cell => {
+        const parsed: ScanResult = {} as ScanResult;
+        let match;
 
-        const fields = line.replace(match[0], '').split(':');
+        if ((match = cell.match(/Address\s*[:|=]\s*([A-Fa-f0-9:]{17})/))) {
+          parsed.address = match[1].toLowerCase();
+        }
 
-        const [
-          active,
-          ssid,
-          bssidAlreadyProcessed,
-          mode,
-          channel,
-          frequency,
-          quality,
-          security,
-          security_flags_wpa,
-          security_flags_rsn
-        ] = fields;
+        if ((match = cell.match(/Channel\s*([0-9]+)/))) {
+          parsed.channel = parseInt(match[1], 10);
+        }
 
-        return {
-          ssid,
-          bssid,
-          mode,
-          channel: parseInt(channel),
-          frequency: parseInt(frequency),
-          // signal_level: dBFromPercentage(quality),
-          quality: parseInt(quality),
-          security: security !== '(none)' ? security : 'none',
-          security_flags: {
-            wpa: security_flags_wpa,
-            rsn: security_flags_rsn
-          }
-        };
+        if ((match = cell.match(/Frequency\s*[:|=]\s*([0-9\.]+)\s*GHz/))) {
+          parsed.frequency = parseFloat(match[1]);
+        }
+
+        if ((match = cell.match(/Mode\s*[:|=]\s*([^\s]+)/))) {
+          parsed.mode = match[1].toLowerCase();
+        }
+
+        if ((match = cell.match(/Quality\s*[:|=]\s*([0-9]+)/))) {
+          parsed.quality = parseInt(match[1], 10);
+        }
+
+        if ((match = cell.match(/Signal level\s*[:|=]\s*(-?[0-9]+)/))) {
+          parsed.signal = parseInt(match[1], 10);
+        }
+
+        if ((match = cell.match(/Noise level\s*[:|=]\s*(-?[0-9]+)/))) {
+          parsed.noise = parseInt(match[1], 10);
+        }
+
+        if ((match = cell.match(/ESSID\s*[:|=]\s*"([^"]+)"/))) {
+          parsed.ssid = match[1];
+        }
+
+        if ((match = cell.match(/WPA2\s+Version/))) {
+          parsed.security = 'wpa2';
+        }
+        else if ((match = cell.match(/WPA\s+Version/))) {
+          parsed.security = 'wpa';
+        }
+        else if ((match = cell.match(/Encryption key\s*[:|=]\s*on/))) {
+          parsed.security = 'wep';
+        }
+        else if ((match = cell.match(/Encryption key\s*[:|=]\s*off/))) {
+          parsed.security = 'open';
+        }
+
+        return parsed;
+      })
+      .filter(cell => cell.address !== undefined)
+      .sort((cellA, cellB) => {
+        return cellB.signal - cellA.signal;
       });
   }
 
@@ -67,10 +83,11 @@ function parse(result: ExecResult): ScanResult[] {
 }
 
 export async function scan(scanOptions: ScanOptions): Promise<ScanResult[]> {
-  return parse(await exec([
-    'iw dev',
-    scanOptions.ifName,
-    'scan',
-  ])
+  return parse(
+    await exec([
+      'iwlist',
+      scanOptions.ifName,
+      'scan'
+    ])
   );
 }
