@@ -1,6 +1,7 @@
-import { ExecResult, exec } from '../helpers/exec';
+import { exec } from '../helpers/exec';
 import { parseOk } from '../helpers/parseOk';
 import { createFileFromTemplate } from '../helpers/createFileFromTemplate';
+import { startAP } from './startAP';
 
 export type HWMode = 'a' | 'g';
 
@@ -31,9 +32,6 @@ export async function createAP(options: CreateAPOptions): Promise<CreateAPResult
     ...options
   };
 
-  /**
-   * nano /etc/hostapd/hostapd.conf
-   */
   await createFileFromTemplate(
     '/etc/hostapd/hostapd.conf',
     'hostapd_conf',
@@ -45,17 +43,11 @@ export async function createAP(options: CreateAPOptions): Promise<CreateAPResult
     }
   );
 
-  /**
-   * nano /etc/hostapd/default
-   */
   await createFileFromTemplate(
     '/etc/default/hostapd',
     'hostapd_default'
   );
 
-  /**
-   * nano /etc/dnsmasq.conf
-   */
   await createFileFromTemplate(
     '/etc/dnsmasq.conf',
     'dnsmasq_conf',
@@ -64,7 +56,8 @@ export async function createAP(options: CreateAPOptions): Promise<CreateAPResult
 
   parseOk(await exec('systemctl unmask hostapd'), { title: 'Unmask hostapd' });
   parseOk(await exec('systemctl enable hostapd'), { title: 'Enable hostapd' });
-  parseOk(await exec('systemctl start hostapd'), { title: 'Start hostapd' });
+
+  await startAP();
 
   // if (commandOptions.reboot === true) {
   //   await exec('reboot');
