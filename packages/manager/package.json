@@ -1,6 +1,6 @@
 {
   "name": "@wifi-s3tup/manager",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "> TODO: description",
   "author": "Alex Coulcher <alex@polyglot.rodeo> (http://polyglot.rodeo/)",
   "homepage": "https://github.com/moonthug/s3tup-wifi#readme",
@@ -33,7 +33,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "57d32668e80ffa7c0406aadf93075af8e9a5b0f9",
+  "gitHead": "23a44afa49b2c85f7c5af4a7fb98e350cb5f4388",
   "dependencies": {
     "string-template": "^1.0.0"
   },
