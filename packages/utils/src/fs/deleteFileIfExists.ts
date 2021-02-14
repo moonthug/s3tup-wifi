@@ -6,7 +6,7 @@ export async function deleteFileIfExists(filepath: string): Promise<boolean> {
 
   if (!fileExists) return false;
 
-  await fs.rm(filepath);
+  await fs.unlink(filepath);
 
   return true;
 }
