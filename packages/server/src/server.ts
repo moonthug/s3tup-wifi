@@ -1,7 +1,7 @@
-import { createServer, Http2Server } from 'http2';
+import { createServer, Server } from 'http';
 import { app } from './app';
 
-let server: Http2Server;
+let server: Server;
 
 export function startServer() {
   server = createServer(app.callback());
