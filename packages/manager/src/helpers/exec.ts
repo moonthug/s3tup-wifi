@@ -20,13 +20,9 @@ export async function exec(command: string | string[]): Promise<ExecResult> {
         return reject(err);
       }
 
-      if (stdErr) {
-        logger.debug(`execute command wrote to stdErr:\n${commandValue}\n${stdErr}`);
-        return resolve({ stdErr, error: true });
-      }
-
-      logger.debug(`execute command wrote to stdOut:\n${commandValue}\n${stdOut}`);
-      resolve({ stdOut, error: false });
+      logger.debug(`wrote to stdOut:\n${stdOut}`);
+      logger.debug(`wrote to stdErr:\n${stdErr}`);
+      resolve({ stdOut, stdErr, error: false });
     });
   });
 }
