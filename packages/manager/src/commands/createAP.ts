@@ -58,7 +58,8 @@ export async function createAP(options: CreateAPOptions): Promise<CreateAPResult
    */
   await createFileFromTemplate(
     '/etc/dnsmasq.conf',
-    'dnsmasq_conf'
+    'dnsmasq_conf',
+    { ifName: commandOptions.ifName }
   );
 
   parseOk(await exec('systemctl unmask hostapd'), { title: 'Unmask hostapd' });
